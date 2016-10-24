@@ -2,6 +2,7 @@
 #include<string>
 #include<fstream>
 #include<vector>
+#include<iomanip>
 #include<algorithm>
 #include<map>
 #define C 100
@@ -151,18 +152,38 @@ uint16_t bfa(map<uint16_t,vector<uint16_t>>& mp,vector<uint16_t>& wgs){
 
 bool msrt(uint16_t i,uint16_t j){cmp1++; return (i>j);}
 
+void sh(map<uint16_t,vector<uint16_t>>& mp,vector<uint16_t>& wgs){
+	cout<<'\n'<<"  "; vector<bool> ispckd;
+	for(uint16_t i=0;i<wgs.size();i++) {cout<<setw(3)<<left<<i; ispckd.push_back(0);} cout<<'\n';
+	for(map<uint16_t,vector<uint16_t>>::iterator mit=mp.begin(); mit!=mp.end(); ++mit){
+		cout<<mit->first<<' '; uint16_t lcnt=0;
+		for(vector<uint16_t>::iterator it=wgs.begin(); it!=wgs.end(); ++it){
+			if(lcnt<(mit->second).size()){
+				if((mit->second).at(lcnt)==(*it)&&ispckd.at(it-wgs.begin())==0){
+					cout<<setw(3)<<left<<*it; lcnt++;
+					ispckd.at(it-wgs.begin())=1;
+				}
+				else cout<<setw(3)<<left<<' ';
+			}
+		}
+		cout<<'\n';
+	}
+}
+
 int main(){
-	vector<uint16_t> wgs;
+	vector<uint16_t> wgs; uint32_t cmprs=0;
 	map<uint16_t,vector<uint16_t>> cntnrs;
-	gff("qtst.txt",wgs);
-	sort(wgs.begin(),wgs.end(),msrt); cout<<"cmp1="<<cmp1<<'\n';
+	gff("q3.txt",wgs);
+	sort(wgs.begin(),wgs.end(),msrt);// cout<<"cmp1="<<cmp1<<'\n';
 	for(vector<uint16_t>::iterator it=wgs.begin(); it!=wgs.end(); ++it){cout<<*it<<' ';} cout<<'\n';
-	wfa(cntnrs,wgs);
-	for (map<uint16_t,vector<uint16_t>>::iterator it=cntnrs.begin(); it!=cntnrs.end(); ++it){
+	cmprs=bfa(cntnrs,wgs)+cmp1;
+	/*for (map<uint16_t,vector<uint16_t>>::iterator it=cntnrs.begin(); it!=cntnrs.end(); ++it){
 		cout<<it->first<<" => ";
 		for(vector<uint16_t>::iterator itv=(it->second).begin(); itv!=(it->second).end(); ++itv){cout<<*itv<<' ';}
 		cout<<'\n';
-	}
+	}*/
+	sh(cntnrs,wgs);
+	cout<<"\ncmprs="<<cmprs;
 	
 	return 0;
 }
