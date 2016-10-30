@@ -48,7 +48,7 @@ void am2roff(map<uint16_t,vector<unsigned char>>& advtg){
 	}
 	for(auto &x: advtg){
 		if(x.first>=((sum+1)/2)){
-			cout<<"\nam2roff: "<<x.second.at(0)<<' '<<((sum+1)/2);
+			cout<<"\nam2roff: "<<x.second.at(0)<<' ';//<<((sum+1)/2);
 			return;
 		}
 	}
@@ -172,24 +172,32 @@ void conex(map<uint16_t,vector<unsigned char>>& advtg){
 				tmpmp.at(advtg.begin()->second.at(i))+=x.first;
 		}
 	}
-	for(auto& x: tmpmp) cout<<x.first<<": "<<x.second<<'\n';
+	//for(auto& x: tmpmp) cout<<x.first<<": "<<x.second<<'\n';
 	map<unsigned char,uint16_t>::iterator tmit=tmpmp.begin(),tmit1=tmpmp.begin(); ++tmit1;
 	while(nadg.begin()->second.size()!=1){
-		
+		//cout<<"\n\n";
+		for(uint8_t i=0;i<nadg.begin()->second.size();i++){
+		tmpmp.at(nadg.begin()->second.at(i))=0;
+		for(auto &x: nadg){
+			if(x.second.at(0)==nadg.begin()->second.at(i))
+				tmpmp.at(nadg.begin()->second.at(i))+=x.first;
+			}
+		}
+		//for(auto& x: tmpmp) cout<<x.first<<": "<<x.second<<'\n';
 		tmit=tmpmp.begin(),tmit1=tmpmp.begin(); ++tmit1;
 		if((tmit->second)<(tmit1->second)){
-			cout<<"\ntmit->first "<<tmit->first<<" tmit->second "<<tmit->second;
+			//cout<<"\ntmit->first "<<tmit->first<<" tmit->second "<<tmit->second;
 			rbm(nadg,tmit->first);
 			tmpmp.erase(tmit->first);
 			
 		}
 		else{
-			cout<<"\n(tmit+1)->first "<<tmit1->first<<" (tmit+1)->second "<<tmit1->second;
+			//cout<<"\n(tmit+1)->first "<<tmit1->first<<" (tmit+1)->second "<<tmit1->second;
 			rbm(nadg, tmit1->first);
 			tmpmp.erase(tmit1->first);
 		}
 	}
-	//cout<<"\nconex: "<<
+	cout<<"\nconex: "<<nadg.begin()->second.at(0);
 }
 
 int main(){
