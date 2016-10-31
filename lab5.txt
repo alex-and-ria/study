@@ -1,0 +1,13 @@
+object
+search control;
+circuit lab5;
+ein(1,0)=FSIN(0, 1, 1.m, 0, 0, 0);#FSFFM(0,10,1.m,0,0);
+QL(1,2,0)=type1.differ;
+g2(2,0)=1;
+list type1.differ;                                                               
+timecon=0.1;
+&
+task;
+#TR; CONST TMAX=500; PLOT v1,v2;
+DC; AC; TF K1=V2/Uein; CONST LFREQ=0.1, UFREQ=600; LPLOT DB.K1, PH.K1;
+&
