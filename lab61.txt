@@ -1,0 +1,46 @@
+object
+search allted;
+circuit lab6;
+ein(1,0)=0.03;
+z1(1,4,2,0)=type1.adder;
+z2(2,3,0)=type1.firlag;
+z3(3,4,0)=type1.infirlag;
+
+MODEL adder(in1,in2,out,b);
+j1(in1,b)=0;
+j2(b,in2)=0;
+e1(out,b)=fl(gain1,gain2/uj1,uj2);
+LIST type1.ADDER;
+gain1=1; 			#Коефіцієнт підсилення;	
+gain2=1; 			#Коефіцієнт підсилення;
+
+MODEL firlag(in,out,b);
+jin(in,b)=0;
+e1(1,b)=fl(1/ujin);
+g1(1,2)=1;
+c1(2,b)=timecon;
+e2(out,b)=fl(gain/uc1);
+#Перелік параметрів аперіодичної ланки;
+LIST type1.FIRLAG; 		
+gain =1.5;  			#Коефіцієнт підсилення; K1;  
+timecon=0.2;  			#Постійна часу; T1;
+
+MODEL infirlag(in,out,b);
+jin(in,b)=0;
+e1(1,b)=fl(gain/ujin);
+g1(1,2)=1;
+c1(2,b)=timecon;
+jint1(b,out)=fl(1/uc1);
+cint(out,b)=1;
+LIST type1.INFIRLAG;
+gain =2.6;  #K2;  
+timecon=0.06; #T2;  
+&
+task;
+tr;
+const tmax=5;
+FIX TREG=F4(V4,5,0,5);
+FIX OVERSH=F14(V4,100,0,5);
+PLOT V1=input, V4=output, V2=error;
+&
+end
