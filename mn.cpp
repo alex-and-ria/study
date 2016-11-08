@@ -1,3 +1,4 @@
+//! \file \brief main file to test  methods in dist class;
 #include<iostream>
 #include"classes.cpp"
 using namespace std;

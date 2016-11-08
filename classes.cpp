@@ -1,3 +1,4 @@
+//! \file \brief realisation of methods; \details classes and their methods defined in classes.h;
 #include<iostream>
 #include<math.h>
 #include<time.h>
@@ -7,32 +8,35 @@ using namespace std;
 #define ntst 10
 #define eps 10e-5
 
+//! \param eem is another object of engm with which comparison; 
+//!\return true if objects are equal (difference between inhes less than eps (#define eps 10e-5));
 bool engm::operator==(engm eem) const{
 	if(eem.feet==feet&&fabs(eem.inches-inches)<eps) return true;
 	cout<<"\neem.feet="<<eem.feet<<" feet="<<feet<<" eem.inches="<<eem.inches<<" inches="<<inches;
 	return false;
 }
+//! \param os[in] output stream, \param em[in] object, which fields are for outut;
+//!\return os to enabe os<<[obj1]<<[obj2]<<[...];
 ostream& operator<<(ostream& os, const engm& em){
 	os<<"\neem.feet="<<em.feet<<" eem.inches="<<em.inches;
     return os;
 }
 
-
 dist::dist(engm emu): emtrs(emu), ism(0), MTF(3.280833F) {}
 dist::dist(float meters): mtrs(meters), ism(1), MTF(3.280833F) {} 
-float dist::em2m() const{
+float dist::em2m() const{//!< \return distance in meters from distance in feet and inches which are fields of emtrs field of that object;
 	float fracfeet=emtrs.inches/12.;     //convert the inches
 	fracfeet += static_cast<float>(emtrs.feet); //add the feet
 	return fracfeet/MTF;
 }
-engm dist::m2em() const{
+engm dist::m2em() const{//!< \return distance in feet and inches from distance in meters which is field mtrs of that object;
 	engm emtmp;
 	float fltfeet=MTF * mtrs;  //convert to float feet
 	emtmp.feet=int(fltfeet);           //feet is integer part
 	emtmp.inches=12*(fltfeet-emtmp.feet); 
 	return emtmp;
 }
-ostream& operator<<(ostream& os, const dist& dst){
+ostream& operator<<(ostream& os, const dist& dst){//!< similary to operator<<(ostream& os, const engm& em);
 	if(dst.ism) {
 		os<<"\nmtrs="<<dst.mtrs; return os;
 	}
@@ -65,7 +69,7 @@ tstdist::tstdist(){
 	tstm2em();
 	cout<<"\ntesting m2em() complete";
 }
-ostream& operator<<(ostream&os, const tstdist& td){
+ostream& operator<<(ostream&os, const tstdist& td){//!< similary to operator<<(ostream& os, const engm& em);
 	cout<<"\ntesting em2m() complete";
 	cout<<"\ntesting m2em() complete";
 }
