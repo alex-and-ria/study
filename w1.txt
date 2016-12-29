@@ -1,0 +1,33 @@
+object
+search allted;
+circuit l;
+
+#model sinf(in1,in2);
+#e(in1,in2)=FSIN(1,1,fk,0.5,0.7,0);
+#list type1.sinf;
+#fk=0.001;
+
+#ein(1,0)=type1.sinf;
+#FSIN(1,1,1,0.5,0.7,0);
+ein(1,2)=1;
+e1(1,0)=fl(20000/urn);
+rn(1,2)=2;
+r1(2,0)=1;
+
+
+&
+task;
+dc;
+ac;
+const lfreq=0.001, ufreq=10;
+tf ki=ue1/urn;
+plot ma.ki, ph.ki;
+
+#mva;
+#fix uinp=maxf(ue1);
+#fix uout=maxf(urn);
+#const numb=8;
+#control uinp,uout;
+#varpar fk.ein(0.001,10);
+&
+end

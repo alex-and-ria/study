@@ -1,0 +1,31 @@
+object
+search allted;
+circuit l;
+ein(1,0)=1;
+r1(2,0)=1;
+r2(2,3)=49;
+#rn(3,0)=2;
+
+rd(1,2)=2000;
+rp(2,0)=100;
+cd(1,2)=0.02;
+cp(2,0)=0.1;
+j3(4,0)=fl(20/urd);
+r3(4,0)=1;
+c3(4,0)=0.1;
+j4(3,0)=fl(20/uc3);
+r4(3,0)=1;
+d1(3,6)=def.d;
+ed1(6,0)=0.1;
+d2(7,3)=def.d;
+ed2(0,7)=0.1;
+
+&
+task;
+dc;
+ac;
+const lfreq=0.001, ufreq=10;
+tf ki=ur4/uein;
+plot ma.ki, ph.ki;
+&
+end

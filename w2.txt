@@ -1,0 +1,20 @@
+object
+search allted;
+circuit l;
+ein(1,0)=1;
+rin(2,1)=2000;
+eins(1,5)=fl(200000/urin);
+rout(5,3)=1;
+r1(2,0)=1;
+r2(2,3)=49;
+rn(3,0)=2;
+
+&
+task;
+dc;
+ac;
+const lfreq=0.001, ufreq=10;
+tf ki=v3/uein;
+plot ma.ki, ph.ki;
+&
+end
