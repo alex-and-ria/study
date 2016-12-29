@@ -1,0 +1,17 @@
+object
+search allted;
+circuit l;
+j1(0,1)=1;
+d1(1,0)=def.d;
+c1(1,2)=0.001;
+r1(2,0)=1;
+e1(2,0)=fl(10/ur1);
+&
+task;
+dc;
+tr;
+const tmax=30;
+plot ue1, uj1,ur1,uc1;
+#plot ue1,uj1,ud1, ur1,uc1;
+&
+end

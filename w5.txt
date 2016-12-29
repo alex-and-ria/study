@@ -1,0 +1,50 @@
+object
+search allted;
+circuit l;
+ein(1,0)=1;
+r1(2,0)=1;
+#r2(2,3)=49;
+r2(3,2)=49;
+rn(3,0)=2;
+
+ev(4,5)=10;
+rc1(4,7)=1;
+rc2(4,6)=1;
+c1(7,6)=1;
+q1(7,2,9,0)=def.npn;
+q2(6,1,8,0)=def.npn;
+re1(9,10)=1;
+re2(8,10)=1;
+jee(10,5)=1;
+ree(10,5)=1;
+cee(10,5)=1;
+egnd(5,0)=1;
+rp(4,5)=1;
+dp(5,4)=def.d;
+rb(12,13)=1;
+eb(13,0)=1;
+ja(12,0)=fl(2/uc1);
+jb(12,0)=fl(2/uree);
+j02(12,5)=1;
+r02(12,5)=1;
+e01(12,14)=1;
+r01(14,3)=1;
+dln(16,15)=def.d;
+dlp(15,17)=def.d;
+eln(0,16)=1;
+elp(17,0)=1;
+elim(15,0)=fl(2/ielim);
+ec(4,19)=1;
+dc(3,19)=def.d;
+ee(18,5)=1;
+de(18,3)=def.d;
+
+&
+task;
+dc;
+ac;
+const lfreq=0.001, ufreq=10;
+tf ki=urn/uein;
+plot ma.ki, ph.ki;
+&
+end
